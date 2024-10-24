@@ -1,4 +1,4 @@
-# Expense Tracker
+# Expense Sharing app
 
 This project is an Expense Tracker web application built with Flask. It allows users to manage their expenses by adding, deleting, and viewing their data.
 
