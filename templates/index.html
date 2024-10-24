@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <h1>Expense Tracker</h1>
+
+    <!-- User Management -->
+    <div class="form-section">
+        <h2>User Management</h2>
+        <form id="userForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="mobile">Mobile:</label>
+            <input type="text" id="mobile" name="mobile" required>
+            <button type="submit">Add User</button>
+        </form>
+
+        <h3>Existing Users</h3>
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Expense Management -->
+    <div class="form-section">
+        <h2>Expense Management</h2>
+        <form id="expenseForm">
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" required>
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" required>
+            <label for="split_method">Split Method:</label>
+            <select id="split_method" name="split_method" required>
+                <option value="equal">Equal</option>
+                <option value="exact">Exact</option>
+                <option value="percentage">Percentage</option>
+            </select>
+            <label for="details">Amount:</label>
+            <input type="text" id="details" name="details" placeholder='{"user_id": amount, ...}' required>
+            <button type="submit">Add Expense</button>
+        </form>
+        <h3>Existing Expenses</h3>
+        <table id="expenseTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Split Method</th>
+                    <th>Details</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script src="static/script.js'"></script>
+</body>
+</html>

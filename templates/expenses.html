@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Expense Management</h1>
+    <form id="expenseForm">
+        <input type="text" id="description" placeholder="Description" required>
+        <input type="number" id="amount" placeholder="Amount" required>
+        <select id="splitMethod">
+            <option value="equal">Equal</option>
+            <option value="exact">Exact</option>
+            <option value="percentage">Percentage</option>
+        </select>
+        <textarea id="details" placeholder="Details (JSON format)" required></textarea>
+        <input type="number" id="userId" placeholder="User ID" required>
+        <button type="submit">Add Expense</button>
+    </form>
+    <div id="expenseList"></div>
+
+    <script>
+        // JavaScript for managing expenses
+        document.getElementById('expenseForm').onsubmit = async function(event) {
+            event.preventDefault();
+            const description = document.getElementById('description').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+            const splitMethod = document.getElementById('splitMethod').value;
+            const details = JSON.parse(document.getElementById('details').value);
+            const userId = parseInt(document.getElementById('userId').value);
+
+            const response = await fetch('/api/expense', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ description, amount, split_method: splitMethod, details, user_id: userId })
+            });
+
+            if (response.ok) {
+                alert('Expense added successfully');
+                location.reload();
+            } else {
+                alert('Error adding expense');
+            }
+        }
+
+        async function loadExpenses() {
+            const response = await fetch('/api/expense');
+            const expenses = await response.json();
+            const expenseList = document.getElementById('expenseList');
+            expenseList.innerHTML = '<h2>Expenses</h2><ul>' + expenses.map(exp => `<li>${exp.description} - ${exp.amount} (${exp.split_method})</li>`).join('') + '</ul>';
+        }
+
+        loadExpenses();
+    </script>
+</body>
+</html>

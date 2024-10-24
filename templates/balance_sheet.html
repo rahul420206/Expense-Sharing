@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balance Sheet</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Balance Sheet</h1>
+    <div id="balanceSheet"></div>
+
+    <script>
+        // JavaScript for showing balance sheet
+        async function loadBalanceSheet() {
+            const response = await fetch('/api/balance-sheet');  // Ensure you create this endpoint in your Flask API
+            const balanceData = await response.json();
+            const balanceSheet = document.getElementById('balanceSheet');
+            balanceSheet.innerHTML = '<h2>Balances</h2><ul>' + balanceData.map(b => `<li>${b.user}: ${b.amount}</li>`).join('') + '</ul>';
+        }
+
+        loadBalanceSheet();
+    </script>
+</body>
+</html>
